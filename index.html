@@ -1,1 +1,231 @@
-hj
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMING MINHAJ SET-UP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Roboto:wght@300;400;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+  font-family:'Hind Siliguri','Noto Sans Bengali','Poppins','Roboto',sans-serif !important;
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(135deg,#0b1020,#0f172a);
+  color:white;
+  text-align:center;
+  font-size:clamp(14px,2.5vw,16px);
+}
+
+/* SMOOTH TOUCH ANIMATION FOR ALL BUTTONS */
+button, a, .card{
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* PRESS EFFECT (TOUCH ZOOM IN) */
+button:active,
+a:active,
+.card:active{
+  transform: scale(0.92);
+}
+
+/* TITLE */
+h1{
+  font-size:clamp(18px,4vw,28px);
+}
+
+/* TYPING */
+.typing{
+  font-size:clamp(15px,3.5vw,20px);
+  font-weight:800;
+  color:rgba(0,245,255,0.85);
+  white-space:nowrap;
+  overflow:hidden;
+  display:inline-block;
+  margin:10px auto;
+  border-right:2px solid rgba(0,245,255,0.8);
+  animation:typing 4s steps(40,end) forwards, blink .7s infinite;
+}
+@keyframes typing{from{width:0} to{width:100%}}
+@keyframes blink{50%{border-color:transparent;}}
+
+/* SOCIAL */
+.social{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+
+.social a{
+  padding:10px 14px;
+  border-radius:10px;
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  min-width:90px;
+  font-size:clamp(12px,3vw,14px);
+  display:inline-block;
+}
+
+/* COLORS */
+.telegram { background:#229ED9; box-shadow:0 0 12px #229ED9; }
+.youtube { background:#ff0000; box-shadow:0 0 12px #ff0000; }
+.facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
+
+/* CARD */
+.card{
+  margin:20px auto;
+  padding:18px;
+  width:80%;
+  border-radius:12px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#22c55e,#4ade80);
+  color:black;
+  font-weight:600;
+  box-shadow:0 0 15px #22c55e;
+  font-size:clamp(14px,3.5vw,18px);
+}
+
+/* POPUP */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.popup-content{
+  background:#1e293b;
+  width:min(85%,320px);
+  padding:16px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(56,189,248,0.7);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+}
+
+.popup-content h2 {
+  font-size: clamp(14px, 3.5vw, 18px);
+}
+
+.popup-content p{
+  font-size:clamp(11px,2.8vw,14px);
+  margin:3px 0;
+  line-height:1.4;
+}
+
+/* BUTTONS */
+.download, .close{
+  width:100%;
+  max-width:220px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  font-weight:600;
+  color:white;
+  text-align:center;
+  display:inline-block;
+  text-decoration:none;
+  font-size:clamp(12px,3vw,14px);
+}
+
+/* COLORS */
+.download {
+  background: linear-gradient(45deg, #22c55e, #16a34a);
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.close {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  box-shadow: 0 0 10px #ef4444;
+}
+
+/* FOOTER */
+footer{
+  margin-top:30px;
+  padding:15px;
+  color:#94a3b8;
+  font-size:clamp(12px,2.5vw,14px);
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🚀 আমার অ্যাপসমূহ সেট-আপ</h1>
+<div class="typing" id="typingText"></div>
+
+<div class="social">
+  <a class="telegram" href="https://t.me/mdminhajafrad1" target="_blank">Telegram</a>
+  <a class="youtube" href="https://youtube.com/@gaming_minhaj_ff" target="_blank">YouTube</a>
+  <a class="facebook" href="https://www.facebook.com/share/16jbNHUaaL/" target="_blank">Facebook</a>
+</div>
+
+<div class="card" onclick="openPopup('popup1')">
+🔥 Like + Visitor Bot Setup
+</div>
+
+<!-- POPUP 1 -->
+<div class="popup" id="popup1">
+  <div class="popup-content">
+    <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
+    <p>Step 1 -: অ্যাপ ইনস্টল করুন !</p>
+    <p>Step 2 -: অ্যাপ ওপেন করুন !</p>
+    <p>Step 3 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
+    <p>Step 4 -: এখন মেসেজে যান !</p>
+    <p>Step 5 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
+    <p>যেমন -: /visit bd 1109118534</p>
+    <p>Step 6 -: তারপর গেম ওপেন করুন !</p>
+    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
+    
+    <a class="download" href="https://gamingminhaj.netlify.app/" target="_blank">⬇ Download</a>
+    <button class="close" onclick="closePopup('popup1')">Close</button>
+  </div>
+</div>
+
+<footer>© 2026 MINHAJ AFRAD SET-UP</footer>
+
+<script>
+
+function openPopup(id){
+  document.getElementById(id).style.display="flex";
+  document.body.style.overflow="hidden";
+}
+
+function closePopup(id){
+  document.getElementById(id).style.display="none";
+  document.body.style.overflow="auto";
+}
+
+/* TYPING */
+const text="🔥 Welcome To Gaming Minhaj Setup Website";
+let i=0;
+
+function type(){
+  if(i<text.length){
+    document.getElementById("typingText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type,60);
+  }
+}
+type();
+
+</script>
+
+</body>
+</html>
