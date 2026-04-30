@@ -13,6 +13,8 @@
 *{
   font-family:'Hind Siliguri','Noto Sans Bengali','Poppins','Roboto',sans-serif;
   box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select:none;
 }
 
 body{
@@ -45,9 +47,7 @@ body{
   animation:spin 1s linear infinite;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg);}
-}
+@keyframes spin{to{transform:rotate(360deg);}}
 
 .loader-text{
   margin-top:12px;
@@ -88,11 +88,6 @@ h1{
   margin:15px 0;
 }
 
-/* COLORS */
-.telegram { background:#229ED9; box-shadow:0 0 12px #229ED9; }
-.youtube { background:#ff0000; box-shadow:0 0 12px #ff0000; }
-.facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
-
 .social a{
   padding:10px 14px;
   border-radius:10px;
@@ -100,7 +95,13 @@ h1{
   text-decoration:none;
   font-weight:600;
   min-width:90px;
+  position:relative;
+  overflow:hidden;
 }
+
+.telegram{background:#229ED9;box-shadow:0 0 12px #229ED9;}
+.youtube{background:#ff0000;box-shadow:0 0 12px #ff0000;}
+.facebook{background:#1877F2;box-shadow:0 0 12px #1877F2;}
 
 /* CARD */
 .card{
@@ -113,45 +114,41 @@ h1{
   color:black;
   font-weight:600;
   box-shadow:0 0 15px #22c55e;
+  position:relative;
+  overflow:hidden;
 }
 
 /* POPUP */
-.popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.75);
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-  padding:20px;
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.popup-content{
-  background:#1e293b;
-  width:fit-content;
-  max-width:92%;
-  min-width:260px;
-  max-height:85vh;
-  overflow-y:auto;
-  padding:12px;
-  border-radius:12px;
-  box-shadow:0 0 20px rgba(56,189,248,0.7);
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  align-items:center;
+.popup-content {
+  background: #1e293b;
+  width: min(85%, 320px);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
-/* TEXT */
-.popup-content h2{
-  font-size:clamp(14px,3.5vw,18px);
-  margin:0;
+.popup-content h2 {
+  font-size: clamp(14px, 3.5vw, 18px);
 }
 
-.popup-content p{
-  font-size:clamp(11px,2.8vw,14px);
-  margin:2px 0;
+.popup-content p {
+  font-size: clamp(11px, 2.8vw, 14px);
+  margin: 3px 0;
+  line-height: 1.4;
 }
 
 /* BUTTONS */
@@ -164,10 +161,14 @@ h1{
   font-weight:600;
   cursor:pointer;
   color:white;
-  text-decoration:none;
+  position:relative;
+  overflow:hidden;
 }
 
+/* FIXED DOWNLOAD */
 .download{
+  display:inline-block;
+  text-decoration:none;
   background:linear-gradient(45deg,#22c55e,#16a34a);
   box-shadow:0 0 10px #22c55e;
 }
@@ -177,89 +178,39 @@ h1{
   box-shadow:0 0 10px #ef4444;
 }
 
-/* =======================
-   FIXED ANIMATION SYSTEM
-======================= */
-
-/* start hidden for ALL buttons */
-.social a,
-.card,
-.download,
-.close{
-  opacity:0;
-  transform:translateY(20px);
-  position:relative;
-  overflow:hidden;
-  transition:all 0.25s ease;
-  -webkit-tap-highlight-color:transparent;
+/* RIPPLE */
+.ripple{
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  animation:rippleAnim 600ms linear;
+  background:rgba(255,255,255,0.18);
+  pointer-events:none;
 }
 
-/* fade in together */
+@keyframes rippleAnim{
+  to{transform:scale(4);opacity:0;}
+}
+
+/* ACTIVE */
+.social a:active,
+.card:active,
+.download:active,
+.close:active{
+  transform:scale(0.97);
+}
+
+/* FADE */
 .fade-in{
   animation:fadeUp 0.6s ease forwards;
 }
 
 @keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* click effect */
-.social a:active,
-.card:active,
-.download:active,
-.close:active{
-  transform:scale(0.92);
-  opacity:0.8;
-}
-
-/* hover effect */
-.social a:hover,
-.card:hover,
-.download:hover,
-.close:hover{
-  transform:scale(1.05);
-  filter:brightness(1.1);
-}
-
-/* ripple */
-.social a::after,
-.card::after,
-.download::after,
-.close::after{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:0;
-  height:0;
-  background:rgba(255,255,255,0.25);
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-  transition:width 0.4s ease, height 0.4s ease;
-}
-
-.social a:active::after,
-.card:active::after,
-.download:active::after,
-.close:active::after{
-  width:220px;
-  height:220px;
-}
-
-/* IMPORTANT: FIX POPUP BUTTON VISIBILITY */
-.popup-content a,
-.popup-content button{
-  opacity:1 !important;
-  transform:none !important;
-  visibility:visible !important;
-}
-
-/* STOP ONLY BUGGY ANIMATION INSIDE POPUP TEXT */
-.popup-content *{
-  animation:none !important;
-}
-
+/* FOOTER */
 footer{
   margin-top:30px;
   padding:15px;
@@ -282,26 +233,29 @@ footer{
 <div class="typing" id="typingText"></div>
 
 <div class="social">
-  <a class="telegram">Telegram</a>
-  <a class="youtube">YouTube</a>
-  <a class="facebook">Facebook</a>
+  <a class="telegram" href="https://t.me/mdminhajafrad1" target="_blank">Telegram</a>
+  <a class="youtube" href="https://youtube.com/@gaming_minhaj_ff" target="_blank">YouTube</a>
+  <a class="facebook" href="https://www.facebook.com/share/16jbNHUaaL/" target="_blank">Facebook</a>
 </div>
 
 <div class="card" onclick="openPopup('popup1')">
-🔥 Like + Visitor Bot Setup
+  🔥 Like + Visitor Bot Setup
 </div>
 
+<!-- POPUPS -->
 <div class="popup" id="popup1">
   <div class="popup-content">
-<h2>🔥 Like+Visitor Bot সেট-আপ</h2>
-    <p>Step 1 -: অ্যাপ ইনস্টল করুন !</p>
-    <p>Step 2 -: অ্যাপ ওপেন করুন !</p>
-    <p>Step 3 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
-    <p>Step 4 -: এখন মেসেজে যান !</p>
-    <p>Step 5 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
-    <p>যেমন -: /visit bd 1109118534</p>
-    <p>Step 6 -: তারপর গেম ওপেন করুন !</p>
-    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
+    <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
+    <p>Step 1 -: টেলিগ্রাম অ্যাপ ডাওনলোড করুন !</p>
+    <p>Step 2 -: টেলিগ্রামে একটা আইডি খুলুন !</p>
+    <p>Step 3 -: আমার ওয়েবসাইট থেকে ডাওনলোড করা অ্যাপ ইনস্টল করুন</p>
+    <p>Step 4 -: অ্যাপ ওপেন করুন !</p>
+    <p>Step 5 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
+    <p>Step 6 -: এখন মেসেজে যান !</p>
+    <p>Step 7 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
+    <p>যেমন -: /visit bd 11091185348</p>
+    <p>Step 8 -: তারপর গেম ওপেন করুন !</p>
+    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া আমার ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
     
     <a class="download" href="https://gamingminhaj.netlify.app/" target="_blank">⬇ Download</a>
     <button class="close" onclick="closePopup('popup1')">Close</button>
@@ -312,6 +266,7 @@ footer{
 
 <script>
 
+/* POPUP */
 function openPopup(id){
   document.getElementById(id).style.display="flex";
   document.body.style.overflow="hidden";
@@ -322,7 +277,27 @@ function closePopup(id){
   document.body.style.overflow="auto";
 }
 
-/* LOADER + ALL ANIMATION */
+/* RIPPLE */
+document.querySelectorAll(".social a, .card, .download, .close")
+.forEach(el=>{
+  el.addEventListener("click", function(e){
+
+    const ripple=document.createElement("span");
+    ripple.classList.add("ripple");
+
+    const rect=this.getBoundingClientRect();
+    const size=Math.max(rect.width,rect.height);
+
+    ripple.style.width=ripple.style.height=size+"px";
+    ripple.style.left=(e.clientX-rect.left-size/2)+"px";
+    ripple.style.top=(e.clientY-rect.top-size/2)+"px";
+
+    this.appendChild(ripple);
+    setTimeout(()=>ripple.remove(),600);
+  });
+});
+
+/* LOADER + TYPE */
 window.addEventListener("load",()=>{
   setTimeout(()=>{
 
@@ -330,30 +305,23 @@ window.addEventListener("load",()=>{
     document.body.style.overflow="auto";
 
     document.getElementById("typingText").classList.add("start");
-    startTyping();
 
-    /* ALL BUTTONS SAME TIME FADE */
+    let text="🔥 Welcome To Gaming Minhaj Setup Website";
+    let i=0;
+
+    function type(){
+      if(i<text.length){
+        document.getElementById("typingText").innerHTML+=text.charAt(i++);
+        setTimeout(type,60);
+      }
+    }
+    type();
+
     document.querySelectorAll(".social a,.card,.download,.close")
-    .forEach(el=>{
-      el.classList.add("fade-in");
-    });
+    .forEach(el=>el.classList.add("fade-in"));
 
   },2000);
 });
-
-/* TYPING */
-let text="🔥 Welcome To Gaming Minhaj Setup Website";
-let i=0;
-
-function startTyping(){
-  function type(){
-    if(i<text.length){
-      document.getElementById("typingText").innerHTML+=text.charAt(i++);
-      setTimeout(type,60);
-    }
-  }
-  type();
-}
 
 </script>
 
