@@ -11,7 +11,7 @@
 
 /* GLOBAL */
 *{
-  font-family:'Hind Siliguri','Noto Sans Bengali','Poppins','Roboto',sans-serif !important;
+  font-family:'Hind Siliguri','Noto Sans Bengali','Poppins','Roboto',sans-serif;
   box-sizing:border-box;
 }
 
@@ -21,19 +21,38 @@ body{
   color:white;
   text-align:center;
   font-size:clamp(14px,2.5vw,16px);
+  overflow:hidden;
 }
 
-/* SMOOTH TOUCH ANIMATION FOR ALL BUTTONS */
-button, a, .card{
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  -webkit-tap-highlight-color: transparent;
+/* LOADER */
+#loader{
+  position:fixed;
+  inset:0;
+  background:#0b1020;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
 }
 
-/* PRESS EFFECT (TOUCH ZOOM IN) */
-button:active,
-a:active,
-.card:active{
-  transform: scale(0.92);
+.loader-circle{
+  width:60px;
+  height:60px;
+  border:5px solid rgba(255,255,255,0.1);
+  border-top:5px solid #22c55e;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+.loader-text{
+  margin-top:12px;
+  color:#22c55e;
+  font-size:14px;
 }
 
 /* TITLE */
@@ -51,8 +70,12 @@ h1{
   display:inline-block;
   margin:10px auto;
   border-right:2px solid rgba(0,245,255,0.8);
+}
+
+.typing.start{
   animation:typing 4s steps(40,end) forwards, blink .7s infinite;
 }
+
 @keyframes typing{from{width:0} to{width:100%}}
 @keyframes blink{50%{border-color:transparent;}}
 
@@ -65,6 +88,11 @@ h1{
   margin:15px 0;
 }
 
+/* COLORS (UNCHANGED) */
+.telegram { background:#229ED9; box-shadow:0 0 12px #229ED9; }
+.youtube { background:#ff0000; box-shadow:0 0 12px #ff0000; }
+.facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
+
 .social a{
   padding:10px 14px;
   border-radius:10px;
@@ -72,14 +100,7 @@ h1{
   text-decoration:none;
   font-weight:600;
   min-width:90px;
-  font-size:clamp(12px,3vw,14px);
-  display:inline-block;
 }
-
-/* COLORS */
-.telegram { background:#229ED9; box-shadow:0 0 12px #229ED9; }
-.youtube { background:#ff0000; box-shadow:0 0 12px #ff0000; }
-.facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
 
 /* CARD */
 .card{
@@ -92,7 +113,6 @@ h1{
   color:black;
   font-weight:600;
   box-shadow:0 0 15px #22c55e;
-  font-size:clamp(14px,3.5vw,18px);
 }
 
 /* POPUP */
@@ -104,54 +124,121 @@ h1{
   justify-content:center;
   align-items:center;
   z-index:999;
+  padding:20px;
 }
 
 .popup-content{
   background:#1e293b;
-  width:min(85%,320px);
-  padding:16px;
+  width:fit-content;
+  max-width:92%;
+  min-width:260px;
+  max-height:85vh;
+  overflow-y:auto;
+  padding:12px;
   border-radius:12px;
   box-shadow:0 0 20px rgba(56,189,248,0.7);
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:6px;
   align-items:center;
 }
 
-.popup-content h2 {
-  font-size: clamp(14px, 3.5vw, 18px);
+/* TEXT */
+.popup-content h2{
+  font-size:clamp(14px,3.5vw,18px);
+  margin:0;
 }
 
 .popup-content p{
   font-size:clamp(11px,2.8vw,14px);
-  margin:3px 0;
-  line-height:1.4;
+  margin:2px 0;
 }
 
 /* BUTTONS */
 .download, .close{
   width:100%;
-  max-width:220px;
-  padding:10px;
+  max-width:200px;
+  padding:8px 12px;
   border:none;
   border-radius:8px;
   font-weight:600;
+  cursor:pointer;
   color:white;
-  text-align:center;
-  display:inline-block;
   text-decoration:none;
-  font-size:clamp(12px,3vw,14px);
 }
 
 /* COLORS */
-.download {
-  background: linear-gradient(45deg, #22c55e, #16a34a);
-  box-shadow: 0 0 10px #22c55e;
+.download{
+  background:linear-gradient(45deg,#22c55e,#16a34a);
+  box-shadow:0 0 10px #22c55e;
 }
 
-.close {
-  background: linear-gradient(45deg, #ef4444, #dc2626);
-  box-shadow: 0 0 10px #ef4444;
+.close{
+  background:linear-gradient(45deg,#ef4444,#dc2626);
+  box-shadow:0 0 10px #ef4444;
+}
+
+/* =========================
+   FIXED BUTTON SYSTEM
+========================= */
+
+.social a,
+.card,
+.download,
+.close{
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* CLICK (ALL SAME) */
+.social a:active,
+.card:active,
+.download:active,
+.close:active{
+  transform:scale(0.92);
+  opacity:0.8;
+}
+
+/* HOVER (ALL SAME) */
+.social a:hover,
+.card:hover,
+.download:hover,
+.close:hover{
+  transform:scale(1.04);
+  filter:brightness(1.1);
+}
+
+/* RIPPLE EFFECT */
+.social a::after,
+.card::after,
+.download::after,
+.close::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:0;
+  background:rgba(255,255,255,0.25);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width 0.4s ease, height 0.4s ease;
+}
+
+.social a:active::after,
+.card:active::after,
+.download:active::after,
+.close:active::after{
+  width:220px;
+  height:220px;
+}
+
+/* STOP POPUP INTERNAL ANIMATION BUG */
+.popup-content *{
+  animation:none !important;
+  transform:none;
 }
 
 /* FOOTER */
@@ -159,7 +246,7 @@ footer{
   margin-top:30px;
   padding:15px;
   color:#94a3b8;
-  font-size:clamp(12px,2.5vw,14px);
+  font-size:14px;
 }
 
 </style>
@@ -167,20 +254,27 @@ footer{
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-circle"></div>
+  <div class="loader-text">LOADING GAMING MINHAJ...</div>
+</div>
+
 <h1>🚀 আমার অ্যাপসমূহ সেট-আপ</h1>
+
 <div class="typing" id="typingText"></div>
 
 <div class="social">
-  <a class="telegram" href="https://t.me/mdminhajafrad1" target="_blank">Telegram</a>
-  <a class="youtube" href="https://youtube.com/@gaming_minhaj_ff" target="_blank">YouTube</a>
-  <a class="facebook" href="https://www.facebook.com/share/16jbNHUaaL/" target="_blank">Facebook</a>
+  <a class="telegram">Telegram</a>
+  <a class="youtube">YouTube</a>
+  <a class="facebook">Facebook</a>
 </div>
 
 <div class="card" onclick="openPopup('popup1')">
 🔥 Like + Visitor Bot Setup
 </div>
 
-<!-- POPUP 1 -->
+<!-- POPUPS -->
 <div class="popup" id="popup1">
   <div class="popup-content">
     <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
@@ -195,10 +289,10 @@ footer{
     
     <a class="download" href="https://gamingminhaj.netlify.app/" target="_blank">⬇ Download</a>
     <button class="close" onclick="closePopup('popup1')">Close</button>
-  </div>
-</div>
+    </div>
+    </div>
 
-<footer>© 2026 MINHAJ AFRAD SET-UP</footer>
+<footer>© 2026 MINHAJ AFRAD</footer>
 
 <script>
 
@@ -212,18 +306,31 @@ function closePopup(id){
   document.body.style.overflow="auto";
 }
 
+/* LOADER */
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+    document.body.style.overflow="auto";
+
+    document.getElementById("typingText").classList.add("start");
+    startTyping();
+
+  },2000);
+});
+
 /* TYPING */
-const text="🔥 Welcome To Gaming Minhaj Setup Website";
+let text="🔥 Welcome To Gaming Minhaj Setup Website";
 let i=0;
 
-function type(){
-  if(i<text.length){
-    document.getElementById("typingText").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type,60);
+function startTyping(){
+  function type(){
+    if(i<text.length){
+      document.getElementById("typingText").innerHTML+=text.charAt(i++);
+      setTimeout(type,60);
+    }
   }
+  type();
 }
-type();
 
 </script>
 
