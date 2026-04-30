@@ -88,7 +88,7 @@ h1{
   margin:15px 0;
 }
 
-/* COLORS (UNCHANGED) */
+/* COLORS */
 .telegram { background:#229ED9; box-shadow:0 0 12px #229ED9; }
 .youtube { background:#ff0000; box-shadow:0 0 12px #ff0000; }
 .facebook { background:#1877F2; box-shadow:0 0 12px #1877F2; }
@@ -167,7 +167,6 @@ h1{
   text-decoration:none;
 }
 
-/* COLORS */
 .download{
   background:linear-gradient(45deg,#22c55e,#16a34a);
   box-shadow:0 0 10px #22c55e;
@@ -178,21 +177,34 @@ h1{
   box-shadow:0 0 10px #ef4444;
 }
 
-/* =========================
-   FIXED BUTTON SYSTEM
-========================= */
+/* =======================
+   FIXED ANIMATION SYSTEM
+======================= */
 
+/* start hidden for ALL buttons */
 .social a,
 .card,
 .download,
 .close{
+  opacity:0;
+  transform:translateY(20px);
   position:relative;
   overflow:hidden;
-  transition:transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+  transition:all 0.25s ease;
   -webkit-tap-highlight-color:transparent;
 }
 
-/* CLICK (ALL SAME) */
+/* fade in together */
+.fade-in{
+  animation:fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* click effect */
 .social a:active,
 .card:active,
 .download:active,
@@ -201,16 +213,16 @@ h1{
   opacity:0.8;
 }
 
-/* HOVER (ALL SAME) */
+/* hover effect */
 .social a:hover,
 .card:hover,
 .download:hover,
 .close:hover{
-  transform:scale(1.04);
+  transform:scale(1.05);
   filter:brightness(1.1);
 }
 
-/* RIPPLE EFFECT */
+/* ripple */
 .social a::after,
 .card::after,
 .download::after,
@@ -235,13 +247,19 @@ h1{
   height:220px;
 }
 
-/* STOP POPUP INTERNAL ANIMATION BUG */
-.popup-content *{
-  animation:none !important;
-  transform:none;
+/* IMPORTANT: FIX POPUP BUTTON VISIBILITY */
+.popup-content a,
+.popup-content button{
+  opacity:1 !important;
+  transform:none !important;
+  visibility:visible !important;
 }
 
-/* FOOTER */
+/* STOP ONLY BUGGY ANIMATION INSIDE POPUP TEXT */
+.popup-content *{
+  animation:none !important;
+}
+
 footer{
   margin-top:30px;
   padding:15px;
@@ -254,7 +272,6 @@ footer{
 
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="loader-circle"></div>
   <div class="loader-text">LOADING GAMING MINHAJ...</div>
@@ -274,10 +291,9 @@ footer{
 🔥 Like + Visitor Bot Setup
 </div>
 
-<!-- POPUPS -->
 <div class="popup" id="popup1">
   <div class="popup-content">
-    <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
+<h2>🔥 Like+Visitor Bot সেট-আপ</h2>
     <p>Step 1 -: অ্যাপ ইনস্টল করুন !</p>
     <p>Step 2 -: অ্যাপ ওপেন করুন !</p>
     <p>Step 3 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
@@ -289,8 +305,8 @@ footer{
     
     <a class="download" href="https://gamingminhaj.netlify.app/" target="_blank">⬇ Download</a>
     <button class="close" onclick="closePopup('popup1')">Close</button>
-    </div>
-    </div>
+  </div>
+</div>
 
 <footer>© 2026 MINHAJ AFRAD</footer>
 
@@ -306,14 +322,21 @@ function closePopup(id){
   document.body.style.overflow="auto";
 }
 
-/* LOADER */
+/* LOADER + ALL ANIMATION */
 window.addEventListener("load",()=>{
   setTimeout(()=>{
+
     document.getElementById("loader").style.display="none";
     document.body.style.overflow="auto";
 
     document.getElementById("typingText").classList.add("start");
     startTyping();
+
+    /* ALL BUTTONS SAME TIME FADE */
+    document.querySelectorAll(".social a,.card,.download,.close")
+    .forEach(el=>{
+      el.classList.add("fade-in");
+    });
 
   },2000);
 });
