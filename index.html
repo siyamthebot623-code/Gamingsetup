@@ -22,7 +22,7 @@ body{
   background:linear-gradient(135deg,#0b1020,#0f172a);
   color:white;
   text-align:center;
-  font-size:clamp(14px,2.5vw,16px);
+  font-size:clamp(14px,2.2vw,18px);
   overflow:hidden;
 }
 
@@ -52,17 +52,18 @@ body{
 .loader-text{
   margin-top:12px;
   color:#22c55e;
-  font-size:14px;
+  font-size:clamp(12px,2vw,15px);
 }
 
 /* TITLE */
 h1{
-  font-size:clamp(18px,4vw,28px);
+  font-size:clamp(18px,4vw,32px);
+  margin-top:15px;
 }
 
 /* TYPING */
 .typing{
-  font-size:clamp(15px,3.5vw,20px);
+  font-size:clamp(14px,3.5vw,22px);
   font-weight:800;
   color:rgba(0,245,255,0.85);
   white-space:nowrap;
@@ -95,6 +96,7 @@ h1{
   text-decoration:none;
   font-weight:600;
   min-width:90px;
+  font-size:clamp(12px,2.2vw,15px);
   position:relative;
   overflow:hidden;
 }
@@ -113,6 +115,7 @@ h1{
   background:linear-gradient(45deg,#22c55e,#4ade80);
   color:black;
   font-weight:600;
+  font-size:clamp(13px,2.5vw,16px);
   box-shadow:0 0 15px #22c55e;
   position:relative;
   overflow:hidden;
@@ -129,53 +132,61 @@ h1{
   z-index: 999;
 }
 
+/* 🔥 ORIGINAL GLOW RESTORED */
 .popup-content {
   background: #1e293b;
-  width: min(85%, 320px);
+  width: min(88%, 340px);
   padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.7);
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
+
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.7),
+              0 0 45px rgba(34, 211, 238, 0.25);
+
+  border: 1px solid rgba(34, 211, 238, 0.3);
 }
 
-.popup-content h2 {
-  font-size: clamp(14px, 3.5vw, 18px);
+/* TEXT AUTO */
+h2{
+  font-size:clamp(16px,3.2vw,20px);
 }
 
-.popup-content p {
-  font-size: clamp(11px, 2.8vw, 14px);
-  margin: 3px 0;
-  line-height: 1.4;
+p{
+  font-size:clamp(13px,2.3vw,16px);
+  line-height:1.5;
+  margin:4px 0;
 }
 
 /* BUTTONS */
-.download, .close{
+.setup, .download, .close{
   width:100%;
-  max-width:200px;
-  padding:8px 12px;
+  max-width:220px;
+  padding:10px 12px;
   border:none;
   border-radius:8px;
   font-weight:600;
   cursor:pointer;
   color:white;
+  text-decoration:none;
+  font-size:clamp(12px,2.5vw,15px);
   position:relative;
   overflow:hidden;
 }
 
-/* FIXED DOWNLOAD */
-.download{
-  display:inline-block;
-  text-decoration:none;
-  background:linear-gradient(45deg,#22c55e,#16a34a);
-  box-shadow:0 0 10px #22c55e;
-}
+.setup{background:#2563eb;box-shadow:0 0 12px #3b82f6;}
+.download{background:#16a34a;box-shadow:0 0 10px #22c55e;}
+.close{background:#dc2626;box-shadow:0 0 10px #ef4444;}
 
-.close{
-  background:linear-gradient(45deg,#ef4444,#dc2626);
-  box-shadow:0 0 10px #ef4444;
+/* ACTIVE */
+.card:active,
+.social a:active,
+.setup:active,
+.download:active,
+.close:active{
+  transform:scale(0.97);
 }
 
 /* RIPPLE */
@@ -192,12 +203,12 @@ h1{
   to{transform:scale(4);opacity:0;}
 }
 
-/* ACTIVE */
-.social a:active,
-.card:active,
-.download:active,
-.close:active{
-  transform:scale(0.97);
+/* FOOTER */
+footer{
+  margin-top:30px;
+  padding:15px;
+  color:#94a3b8;
+  font-size:clamp(12px,2vw,14px);
 }
 
 /* FADE */
@@ -208,14 +219,6 @@ h1{
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(20px);}
   to{opacity:1;transform:translateY(0);}
-}
-
-/* FOOTER */
-footer{
-  margin-top:30px;
-  padding:15px;
-  color:#94a3b8;
-  font-size:14px;
 }
 
 </style>
@@ -238,27 +241,37 @@ footer{
   <a class="facebook" href="https://www.facebook.com/share/16jbNHUaaL/" target="_blank">Facebook</a>
 </div>
 
-<div class="card" onclick="openPopup('popup1')">
-  🔥 FF Like + Visitor Bot Setup
-</div>
+<div class="card" onclick="openPopup('popup1')">📦 GIFT SEND PROXY SET-UP</div>
+<div class="card" onclick="openPopup('popup2')">📦 LIKE+VISITOR BOT SET-UP</div>
 
-<!-- POPUPS -->
+<!-- POPUP 1 -->
 <div class="popup" id="popup1">
   <div class="popup-content">
-    <h2>🔥 FF Like+Visitor Bot সেট-আপ</h2>
-    <p>Step 1 -: টেলিগ্রাম অ্যাপ ডাওনলোড করুন !</p>
-    <p>Step 2 -: টেলিগ্রামে একটা আইডি খুলুন !</p>
-    <p>Step 3 -: আমার ওয়েবসাইট থেকে ডাওনলোড করা অ্যাপ ইনস্টল করুন</p>
-    <p>Step 4 -: অ্যাপ ওপেন করুন !</p>
-    <p>Step 5 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
-    <p>Step 6 -: এখন মেসেজে যান !</p>
-    <p>Step 7 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
-    <p>যেমন -: /visit bd 11091185348</p>
-    <p>Step 8 -: তারপর গেম ওপেন করুন !</p>
-    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া আমার ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
-    
-    <a class="download" href="https://gamingminhaj.netlify.app/" target="_blank">⬇ Download</a>
+    <h2>🔥 GIFT SEND PROXY সেট-আপ</h2>
+    <p>👇👇 নিচের ভিডিও দেখে সেট-আপ করুন 👇👇</p>
+    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
+
+    <a class="setup" href="https://youtube.com/@gaming_minhaj_ff?si=qyyAM2Xa-ow4T6qm">🎬 Setup Video</a>
+    <a class="download" href="https://gamingminhajapp.netlify.app/">⬇️ Download</a>
     <button class="close" onclick="closePopup('popup1')">Close</button>
+  </div>
+</div>
+
+<!-- POPUP 2 -->
+<div class="popup" id="popup2">
+  <div class="popup-content">
+    <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
+    <p>Step 1 -: অ্যাপ ইনস্টল করুন !</p>
+    <p>Step 2 -: অ্যাপ ওপেন করুন !</p>
+    <p>Step 3 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
+    <p>Step 4 -: এখন মেসেজে যান !</p>
+    <p>Step 5 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
+    <p>যেমন -: /visit bd 1109118534</p>
+    <p>Step 6 -: তারপর গেম ওপেন করুন !</p>
+    <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
+    
+    <a class="download" href="https://gamingminhajapp.netlify.app/" target="_blank">⬇️ Download</a>
+    <button class="close" onclick="closePopup('popup2')">Close</button>
   </div>
 </div>
 
@@ -278,7 +291,7 @@ function closePopup(id){
 }
 
 /* RIPPLE */
-document.querySelectorAll(".social a, .card, .download, .close")
+document.querySelectorAll(".social a, .card, .setup, .download, .close")
 .forEach(el=>{
   el.addEventListener("click", function(e){
 
@@ -317,7 +330,7 @@ window.addEventListener("load",()=>{
     }
     type();
 
-    document.querySelectorAll(".social a,.card,.download,.close")
+    document.querySelectorAll(".social a,.card,.setup,.download,.close")
     .forEach(el=>el.classList.add("fade-in"));
 
   },2000);
