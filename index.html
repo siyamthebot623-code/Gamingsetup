@@ -52,18 +52,18 @@ body{
 .loader-text{
   margin-top:12px;
   color:#22c55e;
-  font-size:clamp(12px,3vw,15px);
+  font-size:clamp(12px,2vw,15px);
 }
 
 /* TITLE */
 h1{
-  font-size:clamp(20px,5vw,34px);
+  font-size:clamp(18px,4vw,32px);
   margin-top:15px;
 }
 
 /* TYPING */
 .typing{
-  font-size:clamp(14px,4vw,24px);
+  font-size:clamp(14px,3.5vw,22px);
   font-weight:800;
   color:rgba(0,245,255,0.9);
   white-space:nowrap;
@@ -96,27 +96,29 @@ h1{
   text-decoration:none;
   font-weight:600;
   min-width:90px;
-  font-size:clamp(12px,3vw,15px);
+  font-size:clamp(12px,2.2vw,15px);
+  position:relative;
+  overflow:hidden;
   transition:.25s;
 }
 
-/* SATURATED PREMIUM BUTTONS */
+/* SATURATION BOOST */
 .telegram{
   background:#1da1f2;
-  box-shadow:0 0 15px #1da1f2;
-  filter:saturate(1.8);
+  box-shadow:0 0 15px #1da1f2,0 0 35px rgba(29,161,242,0.6);
+  filter:saturate(1.6);
 }
 
 .youtube{
   background:#ff0000;
-  box-shadow:0 0 18px #ff0000;
-  filter:saturate(2.2);
+  box-shadow:0 0 18px #ff0000,0 0 35px rgba(255,0,0,0.6);
+  filter:saturate(2.0);
 }
 
 .facebook{
   background:#1877f2;
-  box-shadow:0 0 15px #1877f2;
-  filter:saturate(1.7);
+  box-shadow:0 0 15px #1877f2,0 0 35px rgba(24,119,242,0.6);
+  filter:saturate(1.5);
 }
 
 /* CARD */
@@ -129,8 +131,11 @@ h1{
   background:linear-gradient(45deg,#16a34a,#22c55e);
   color:black;
   font-weight:600;
-  font-size:clamp(13px,3.2vw,17px);
-  box-shadow:0 0 20px #22c55e;
+  font-size:clamp(13px,2.5vw,16px);
+  box-shadow:0 0 20px #22c55e,0 0 40px rgba(34,197,94,0.4);
+  position:relative;
+  overflow:hidden;
+  filter:saturate(1.6);
   transition:.25s;
 }
 
@@ -161,16 +166,9 @@ h1{
   border:1px solid rgba(34,211,238,0.4);
 }
 
-/* TEXT AUTO FIX */
-h2{
-  font-size:clamp(16px,4.5vw,22px);
-}
-
-p{
-  font-size:clamp(13px,3.2vw,16px);
-  line-height:1.6;
-  margin:4px 0;
-}
+/* TEXT */
+h2{font-size:clamp(16px,3.2vw,20px);}
+p{font-size:clamp(13px,2.3vw,16px);line-height:1.5;margin:4px 0;}
 
 /* BUTTONS */
 .setup,.download,.close{
@@ -183,24 +181,29 @@ p{
   cursor:pointer;
   color:white;
   text-decoration:none;
-  font-size:clamp(12px,3.2vw,15px);
+  font-size:clamp(12px,2.5vw,15px);
+  position:relative;
+  overflow:hidden;
   transition:.25s;
 }
 
-/* BUTTON COLORS (FIXED GLOW) */
+/* POPUP BUTTON BOOST */
 .setup{
   background:#2563eb;
-  box-shadow:0 0 15px #3b82f6;
+  box-shadow:0 0 10px #3b82f6,0 0 35px rgba(59,130,246,0.5);
+  filter:saturate(2.0);
 }
 
 .download{
   background:#16a34a;
-  box-shadow:0 0 15px #22c55e;
+  box-shadow:0 0 10px #22c55e,0 0 35px rgba(34,197,94,0.5);
+  filter:saturate(2.0);
 }
 
 .close{
   background:#dc2626;
-  box-shadow:0 0 15px #ef4444;
+  box-shadow:0 0 15px #ef4444,0 0 35px rgba(239,68,68,0.5);
+  filter:saturate(2.0);
 }
 
 /* HOVER */
@@ -209,8 +212,8 @@ p{
 .setup:hover,
 .download:hover,
 .close:hover{
+  filter:saturate(1.8) brightness(1.1);
   transform:scale(1.03);
-  filter:brightness(1.1);
 }
 
 /* ACTIVE */
@@ -241,7 +244,7 @@ footer{
   margin-top:30px;
   padding:15px;
   color:#94a3b8;
-  font-size:clamp(11px,2.8vw,14px);
+  font-size:clamp(12px,2vw,14px);
 }
 
 /* FADE */
@@ -276,24 +279,23 @@ footer{
 <div class="card" onclick="openPopup('popup1')">📦 GIFT SEND PROXY SET-UP</div>
 <div class="card" onclick="openPopup('popup2')">📦 LIKE+VISITOR BOT SET-UP</div>
 
-<!-- POPUP 1 (FULL RESTORED TEXT) -->
+<!-- POPUP 1 -->
 <div class="popup" id="popup1">
   <div class="popup-content">
     <h2>🔥 GIFT SEND PROXY সেট-আপ</h2>
     <p>👇👇 নিচের ভিডিও দেখে সেট-আপ করুন 👇👇</p>
     <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
-
+    
     <a class="setup" href="https://youtube.com/@gaming_minhaj_ff?si=qyyAM2Xa-ow4T6qm">🎬 Setup Video</a>
     <a class="download" href="https://gamingminhajapp.netlify.app/">⬇️ Download</a>
     <button class="close" onclick="closePopup('popup1')">Close</button>
   </div>
 </div>
 
-<!-- POPUP 2 (FULL RESTORED TEXT) -->
+<!-- POPUP 2 -->
 <div class="popup" id="popup2">
   <div class="popup-content">
     <h2>🔥 Like+Visitor Bot সেট-আপ</h2>
-
     <p>Step 1 -: অ্যাপ ইনস্টল করুন !</p>
     <p>Step 2 -: অ্যাপ ওপেন করুন !</p>
     <p>Step 3 -: অ্যাপ এর ভিতরে থাকা টেলিগ্রাম গ্রুপে জয়েন করুন !</p>
@@ -301,9 +303,8 @@ footer{
     <p>Step 5 -: / দিয়ে visit লিখে bd লিখে তারপর আপনার uid দিবেন !</p>
     <p>যেমন -: /visit bd 1109118534</p>
     <p>Step 6 -: তারপর গেম ওপেন করুন !</p>
-
     <p>⚠️ যদি অ্যাপ ইনস্টল করতে ভুলে যান তাহলে নিচের দেওয়া ওয়েবসাইট থেকে ডাওনলোড করে নিন 📢</p>
-
+    
     <a class="download" href="https://gamingminhajapp.netlify.app/" target="_blank">⬇️ Download</a>
     <button class="close" onclick="closePopup('popup2')">Close</button>
   </div>
@@ -348,6 +349,8 @@ window.addEventListener("load",()=>{
     document.getElementById("loader").style.display="none";
     document.body.style.overflow="auto";
 
+    document.getElementById("typingText").classList.add("start");
+
     let text="🔥 Welcome To Gaming Minhaj Setup Website";
     let i=0;
 
@@ -362,7 +365,7 @@ window.addEventListener("load",()=>{
     document.querySelectorAll(".social a,.card,.setup,.download,.close")
     .forEach(el=>el.classList.add("fade-in"));
 
-  },1800);
+  },2000);
 });
 
 </script>
